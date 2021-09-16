@@ -1,0 +1,115 @@
+# Copyright (c) 2020, 2021 Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
+
+title: "OCI APEX Implemenation with Vanity URLs"
+description: "OCI APEX Application with Vanity URLs (Paid Tenancies Only)"
+informationalText: "The auto-generated Load Balancer TLS Certificate should not be used for production use, instead, 
+the user should generate their own TLS Certificate and update the Load Balancer."
+schemaVersion: 1.0.0
+version: "20210916"
+
+source:
+  type: quickstart
+
+locale: "en"
+variableGroups:
+  - title: "General Configuration"
+    variables:
+      - proj_abrv
+      - adb_cpu_core_count
+      - adb_license_model
+
+  - title: "Additional Components"
+    variables:
+      - use_object_storage
+      - use_data_safe
+      - use_oic
+    visible: true
+
+  - title: "Basic Hidden"
+    variables:
+      - tenancy_ocid
+      - compartment_ocid
+      - region
+    visible: false
+
+  - title: "Extras Hidden"
+    variables:
+      - user_ocid
+      - fingerprint
+      - private_key_path
+    visible: false
+
+  - title: "OCI Services Hidden"
+    variables:
+      - adb_dataguard
+      - flex_lb_min_shape
+      - flex_lb_max_shape
+      - adb_storage_size_in_tbs
+      - adb_db_version
+      - vcn_cidr
+      - vcn_is_ipv6enabled
+      - public_subnet_cidr
+      - private_subnet_cidr
+    visible: false
+
+  - title: "Locals Hidden"
+    variables:
+      - adb_private_endpoint
+    visible: false
+
+variables:
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    title: "Compartment"
+    description: "The compartment in which to create compute instance(s)"
+    required: true
+
+  proj_abrv:
+    type: string
+    title: "Resource Name Prefix"
+    required: true
+
+  adb_cpu_core_count:
+    type: integer
+    title: "Initial ADB OCPU Count (Auto-Scalable x3)"
+    description: Number of OCPUs
+    minimum: 1
+    multipleOf: 1
+    required: true
+
+  adb_license_model:
+    type: enum
+    title: "ADB License"
+    default: "BRING_YOUR_OWN_LICENSE"
+    enum:
+      - BRING_YOUR_OWN_LICENSE
+      - LICENSE_INCLUDED
+    required: true
+
+  prov_object_storage:
+    type: boolean
+    title: "Provision Object Storage"
+    default: false
+
+  enable_lb_logging:
+    type: boolean
+    title: "Enable Load Balancer Logging"
+    default: false
+
+  prov_data_safe:
+    type: boolean
+    title: "Provision Data Safe"
+    default: false
+
+  prov_oic:
+    type: boolean
+    title: "Provision Oracle Integration Cloud"
+    default: false
+
+outputs:
+  lb_address:
+    title: "Load Balancer Public IP"
+    displayText: ${Messages.solutionsHub.solutions.ociDevTools.outputs.lb_address.displayText()}
+    type: copyableString
+    visible: true
