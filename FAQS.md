@@ -34,12 +34,12 @@ After creating and logging into an APEX Workspace; the "[SQL Workshop](https://a
 
 _<ins> SQL Developer Web</ins>_
 
-A web based version of SQL Developer (SDW) is accessible by the ADMIN user after deployment at: https://<loadbalancer_ip>/ords/admin/_sdw/.  To enable your Workspace Schema access:
+A web based version of SQL Developer (SDW) is accessible by the ADMIN user after deployment at: `https://<loadbalancer_ip>/ords/admin/_sdw/`.  To enable your Workspace Schema access:
 1. Log into the SQL Developer Web as ADMIN
 2. Under Administration; Click "Database Users"
 3. Find the Workspace Schema and click the "three-dots" next to the name
 4. REST Enable User (Require Authentication)
-5. Access SDW as the Workspace User at: https://<loadbalancer_ip>/ords/<workspace_user>/_sdw/
+5. Access SDW as the Workspace User at: `https://<loadbalancer_ip>/ords/<workspace_user>/_sdw/`
 
 _<ins>External Tools (i.e. SQLDeveloper Client, Toad, etc.) via Bastion</ins>_
 
