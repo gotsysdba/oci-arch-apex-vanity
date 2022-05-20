@@ -26,13 +26,13 @@
 
 **A:** There are a few ways:
 
-_**Quick Note about Security**_ For production use, both the APEX Workspace and SQL Developer Web methods should be IP restricted or blocked completely from public access.  This would be done at the Load Balancer and/or a Web Application Firewall level (beyond the scope of the PoC).
+_**Quick Note about Security**_ For Production use, consider IP restricting or blocking both the APEX Workspace and SQL Developer Web methods from public access.  This would be done at the Load Balancer and/or a Web Application Firewall level (beyond the scope of this PoC).
 
-<ins>APEX SQL Workshop</ins>
+_<ins>APEX SQL Workshop</ins>_
 
 After creating and logging into an APEX Workspace; the "[SQL Workshop](https://apex.oracle.com/en/learn/getting-started/sql-workshop/)" can be used within APEX itself to create, view, and maintain your database objects.
 
-<ins> SQL Developer Web</ins>
+_<ins> SQL Developer Web</ins>_
 
 A web based version of SQL Developer (SDW) is accessible by the ADMIN user after deployment at: https://<loadbalancer_ip>/ords/admin/_sdw/.  To enable your Workspace Schema access:
 1. Log into the SQL Developer Web as ADMIN
@@ -41,6 +41,6 @@ A web based version of SQL Developer (SDW) is accessible by the ADMIN user after
 4. REST Enable User (Require Authentication)
 5. Access SDW as the Workspace User at: https://<loadbalancer_ip>/ords/<workspace_user>/_sdw/
 
-<ins>External Tools (i.e. SQLDeveloper Client, Toad, etc.) via Bastion</ins>
+_<ins>External Tools (i.e. SQLDeveloper Client, Toad, etc.) via Bastion</ins>_
 
 The OCI Bastion Service can be used to tunnel connections from a desktop client to the Autonomous Database.  There is a great [Blog](https://blogs.oracle.com/cloudsecurity/post/qt-6-connecting-autonomous-database-using-oci-bastion) post outlining the process.  The steps for the 443 port can be ignored as it is being exposed by the Load Balancer.
