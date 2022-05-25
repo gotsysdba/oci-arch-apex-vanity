@@ -26,7 +26,7 @@
 
 **A:** There are a few ways:
 
-_**Quick Note about Security**_ For Production use, consider IP restricting or blocking both the APEX Workspace and SQL Developer Web methods from public access.  This would be done at the Load Balancer and/or a Web Application Firewall level (beyond the scope of this PoC).
+_**Quick Note about Security**_ For Production use, consider IP restricting or blocking both the APEX Workspace and SQL Developer Web methods from public access.  This would be done at the Load Balancer and/or a Web Application Firewall level.  To completely block access, review the "Q" below in regards to blocking APEX/ADB Administration Services.
 
 _<ins>APEX SQL Workshop</ins>_
 
@@ -34,7 +34,7 @@ After creating and logging into an APEX Workspace; the "[SQL Workshop](https://a
 
 _<ins> SQL Developer Web</ins>_
 
-A web based version of SQL Developer (SDW) is accessible by the ADMIN user after deployment at: `https://<loadbalancer_ip>/ords/admin/_sdw/`.  To enable your Workspace Schema access:
+A web based version of SQL Developer (SDW) is accessible by the ADMIN user after deployment at: `https://<loadbalancer_ip>/ords/sql-developer`.  To enable your Workspace Schema access:
 1. Log into the SQL Developer Web as ADMIN
 2. Under Administration; Click "Database Users"
 3. Find the Workspace Schema and click the "three-dots" next to the name
@@ -44,3 +44,16 @@ A web based version of SQL Developer (SDW) is accessible by the ADMIN user after
 _<ins>External Tools (i.e. SQLDeveloper Client, Toad, etc.) via Bastion</ins>_
 
 The OCI Bastion Service can be used to tunnel connections from a desktop client to the Autonomous Database.  There is a great [Blog](https://blogs.oracle.com/cloudsecurity/post/qt-6-connecting-autonomous-database-using-oci-bastion) post outlining the process.  The steps for the 443 port can be ignored as it is being exposed by the Load Balancer.
+
+---
+**Q: How do I restrict web access to APEX and Admin Tools?**
+
+**A:** There is a great blog post addressing this question: [Blocking APEX Developer and Administrator Tools](https://blogs.oracle.com/apex/post/adb-vanity-urls-part-2-blocking-tools).
+
+With the exception of the REDIRECT to the default APEX application, the other Load Balancer Rule Sets to block access are part of this IaC.  To enable them, change vars.tf (set false to true):
+```
+// Block APEX/ORDS Dev and Admin Tools 
+variable "enable_lbaas_ruleset" {
+  default = "true"
+}
+```

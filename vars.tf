@@ -19,7 +19,12 @@ variable "private_key_path" {
 
 // General Configuration
 variable "proj_abrv" {
-  default = "apexpoc"
+  default = "apexvan"
+}
+
+// Block APEX/ORDS Dev and Admin Tools 
+variable "enable_lbaas_ruleset" {
+  default = "false"
 }
 
 variable "adb_license_model" {
